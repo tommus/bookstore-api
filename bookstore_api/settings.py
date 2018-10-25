@@ -26,7 +26,7 @@ INSTALLED_APPS += [
 
 INSTALLED_APPS += [
     "account.apps.AccountConfig",
-    "bookstore",
+    "bookstore.apps.BookstoreConfig",
 ]
 
 # endregion

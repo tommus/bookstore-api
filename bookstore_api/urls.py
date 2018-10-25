@@ -3,6 +3,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+# region Configuration
+
+admin.site.site_title = "Bookstore API"
+admin.site.site_header = "Bookstore API"
+
+# endregion
+
 # region Service Patterns
 
 urlpatterns = [
