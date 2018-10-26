@@ -8,7 +8,7 @@ from bookstore.models import Author, Binding, Book, Publisher
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
-        fields = "__all__"
+        fields = ("id", "first_name", "last_name",)
 
 
 # endregion
@@ -18,7 +18,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 class BindingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Binding
-        fields = "__all__"
+        fields = ("id", "description",)
 
 
 # endregion
@@ -26,9 +26,32 @@ class BindingSerializer(serializers.ModelSerializer):
 # region Book Serializer
 
 class BookSerializer(serializers.ModelSerializer):
+    cover = serializers.SerializerMethodField("get_cover_url")
+
+    def get_cover_url(self, obj):
+
+        if not obj.cover:
+            return obj.cover_url
+        else:
+            request = self.context.get("request")
+            url = obj.cover.url
+            return request.build_absolute_uri(url)
+
+
+class BookListSerializer(BookSerializer):
     class Meta:
         model = Book
-        fields = "__all__"
+        fields = ("id", "title", "author", "publisher", "publication_year", "cover",)
+
+
+class BookDetailsSerializer(BookSerializer):
+    class Meta:
+        model = Book
+        fields = (
+            "id", "title", "author", "publisher", "publication_year", "binding", "pages",
+            "format", "isbn", "ean", "release_date", "available", "price_base", "price_discounted",
+            "description", "cover"
+        )
 
 
 # endregion
@@ -38,6 +61,6 @@ class BookSerializer(serializers.ModelSerializer):
 class PublisherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Publisher
-        fields = "__all__"
+        fields = ("id", "name",)
 
 # endregion

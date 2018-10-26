@@ -84,6 +84,15 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # endregion
 
+# region REST
+
+# REST_FRAMEWORK = {
+#     "DEFAULT_PAGINATION_CLASS": "None",
+#     "PAGE_SIZE": 10
+# }
+
+# endregion
+
 # region Security
 
 SECRET_KEY = "bc!!9(w5vs2+5-n%8fd=4b3s^81pxl=d(h%)wkkor)nc-=8)#x"
