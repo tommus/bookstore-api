@@ -92,9 +92,9 @@ if not os.path.exists(TMP_DIR):
     os.makedirs(TMP_DIR)
 
 """Static files location."""
-STATIC_ROOT = os.path.join(ROOT_DIR, "static")
+STATIC_ROOT = os.path.join(TMP_DIR, "static")
 STATICFILES_DIRS = (
-    os.path.join(TMP_DIR, "static"),
+    os.path.join(PUBLIC_DIR, "static"),
 )
 
 # endregion
