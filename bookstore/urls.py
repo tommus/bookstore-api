@@ -1,21 +1,56 @@
-# region Application
-from rest_framework.routers import DefaultRouter
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.urls import path, include
 
-from bookstore.views import AuthorViewSet, BindingViewSet, BookViewSet, PublisherViewSet
+urlpatterns = [
 
-app_name = "bookstore"
+    # Enables admin panel and APIs.
+    path(
+        route="admin/",
+        view=admin.site.urls
+    ),
 
-# endregion
+    # Attaches account API urls.
+    path(
+        route="",
+        view=include("bookstore.account.urls", namespace="account")
+    ),
 
-# region Patterns
+    # Attaches author API urls.
+    path(
+        route="",
+        view=include("bookstore.author.urls", namespace="author")
+    ),
 
-router = DefaultRouter()
-router.register("authors", AuthorViewSet, base_name="authors")
-router.register("bindings", BindingViewSet, base_name="bindings")
-router.register("books", BookViewSet, base_name="books")
-router.register("publishers", PublisherViewSet, base_name="publishers")
+    # Attaches book API urls.
+    path(
+        route="",
+        view=include("bookstore.book.urls", namespace="book")
+    ),
 
-urlpatterns = []
-urlpatterns += router.urls
+    # Attaches publisher API urls.
+    path(
+        route="",
+        view=include("bookstore.publisher.urls", namespace="publisher")
+    ),
+]
 
-# endregion
+
+def mediafiles_urlpatterns(prefix=None):
+    """Helper function to return a URL pattern for serving media files."""
+
+    # Load prefix from settings if not provided.
+    if prefix is None:
+        prefix = settings.MEDIA_URL
+
+    # Create url pattern for media files.
+    return static(prefix, document_root=settings.MEDIA_ROOT)
+
+
+urlpatterns += mediafiles_urlpatterns()
+urlpatterns += staticfiles_urlpatterns()
+
+admin.site.site_title = "Bookstore API"
+admin.site.site_header = "Bookstore API"
