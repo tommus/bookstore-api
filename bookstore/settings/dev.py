@@ -49,7 +49,7 @@ SECRET_KEY = "bc!!9(w5vs2+5-n%8fd=4b3s^81pxl=d(h%)wkkor)nc-=8)#x"
 # endregion
 
 ALLOWED_HOSTS = [
-    "*.windly.co"
+    "dev.windly.co"
 ]
 
 # region Web Server
