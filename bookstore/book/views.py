@@ -1,8 +1,8 @@
 from rest_framework import viewsets
-from rest_framework.pagination import CursorPagination
 
 from bookstore.book.models import Binding, Book
 from bookstore.book.serializers import BindingSerializer, BookListSerializer, BookDetailsSerializer
+from bookstore.common.pagination import CursorHashPagination
 
 
 class BindingViewSet(viewsets.ModelViewSet):
@@ -11,7 +11,7 @@ class BindingViewSet(viewsets.ModelViewSet):
     pagination_class = None
 
 
-class BookPagination(CursorPagination):
+class BookPagination(CursorHashPagination):
     page_size = 25
 
 

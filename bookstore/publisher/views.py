@@ -1,11 +1,11 @@
 from rest_framework import viewsets
-from rest_framework.pagination import CursorPagination
 
+from bookstore.common.pagination import CursorHashPagination
 from bookstore.publisher.models import Publisher
 from bookstore.publisher.serializers import PublisherSerializer
 
 
-class PublisherPagination(CursorPagination):
+class PublisherPagination(CursorHashPagination):
     page_size = 25
 
 

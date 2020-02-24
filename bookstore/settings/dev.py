@@ -12,14 +12,21 @@ INSTALLED_APPS += [
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "bookstore",
-        "USER": "tommus",
-        "PASSWORD": "b0248d59e50ae772a0fd4cc16591fb24",
-        "HOST": "localhost",
-        "PORT": "5432",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(ROOT_DIR, "db.sqlite3"),
     }
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "bookstore",
+#         "USER": "tommus",
+#         "PASSWORD": "b0248d59e50ae772a0fd4cc16591fb24",
+#         "HOST": "localhost",
+#         "PORT": "5432",
+#     }
+# }
 
 # endregion
 
