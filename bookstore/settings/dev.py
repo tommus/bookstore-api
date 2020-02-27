@@ -61,16 +61,6 @@ ALLOWED_HOSTS = [
 
 # endregion
 
-# region Swagger
-
-SWAGGER_SETTINGS = {
-
-    "LOGIN_URL": "/admin/login/",
-    "LOGOUT_URL": "/admin/logout/",
-}
-
-# endregion
-
 # region Web Server
 
 WSGI_APPLICATION = "bookstore.wsgi.dev.application"

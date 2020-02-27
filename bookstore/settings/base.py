@@ -29,6 +29,27 @@ INSTALLED_APPS += [
 
 # endregion
 
+# region Documentation
+
+SWAGGER_SETTINGS = {
+
+    # Configures login endpoint so it is possible to authenticate
+    # into service from Swagger.
+    "LOGIN_URL": "/admin/login/",
+
+    # Configures logout endpoint so it is possible to tear down the
+    # session from Swagger.
+    "LOGOUT_URL": "/admin/logout/",
+}
+
+REDOC_SETTINGS = {
+
+    # Moves url to the right panel of the Redoc.
+    "PATH_IN_MIDDLE": False
+}
+
+# endregion
+
 # region Internationalization
 
 LANGUAGE_CODE = "en-us"

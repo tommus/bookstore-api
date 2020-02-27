@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -15,6 +16,14 @@ class RegisterAccountView(generics.CreateAPIView):
     permission_classes = ()
     serializer_class = AccountSerializer
 
+    @swagger_auto_schema(
+        operation_id="Register",
+        operation_summary="Register",
+        operation_description="Creates account.",
+    )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+
 
 class SignInView(APIView):
     """
@@ -23,6 +32,11 @@ class SignInView(APIView):
 
     permission_classes = ()
 
+    @swagger_auto_schema(
+        operation_id="Sign In via Credentials",
+        operation_summary="Sign In via Credentials",
+        operation_description="Allows user to sign into service.",
+    )
     def post(self, request):
         username = request.data.get("username")
         password = request.data.get("password")
