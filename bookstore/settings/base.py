@@ -23,8 +23,30 @@ INSTALLED_APPS += [
     "bookstore.account.apps.AccountConfig",
     "bookstore.author.apps.AuthorConfig",
     "bookstore.book.apps.BookConfig",
+    "bookstore.docs.apps.DocsConfig",
     "bookstore.publisher.apps.PublisherConfig",
 ]
+
+# endregion
+
+# region Documentation
+
+SWAGGER_SETTINGS = {
+
+    # Configures login endpoint so it is possible to authenticate
+    # into service from Swagger.
+    "LOGIN_URL": "/admin/login/",
+
+    # Configures logout endpoint so it is possible to tear down the
+    # session from Swagger.
+    "LOGOUT_URL": "/admin/logout/",
+}
+
+REDOC_SETTINGS = {
+
+    # Moves url to the right panel of the Redoc.
+    "PATH_IN_MIDDLE": False
+}
 
 # endregion
 
@@ -103,15 +125,15 @@ STATICFILES_DIRS = (
 
 REST_FRAMEWORK = {
 
+    # Defines date time format.
+    "DATETIME_FORMAT": "iso-8601",
+
     # Defines default authentication method.
     "DEFAULT_AUTHENTICATION_CLASSES": (
 
         # Django.
         "rest_framework.authentication.SessionAuthentication",
     ),
-
-    # Defines date time format.
-    "DATETIME_FORMAT": "iso-8601",
 }
 
 # endregion

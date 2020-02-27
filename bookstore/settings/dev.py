@@ -4,6 +4,7 @@ from bookstore.settings.base import *
 
 INSTALLED_APPS += [
     "django_extensions",
+    "drf_yasg",
 ]
 
 # endregion
@@ -52,9 +53,13 @@ SECRET_KEY = "bc!!9(w5vs2+5-n%8fd=4b3s^81pxl=d(h%)wkkor)nc-=8)#x"
 
 # endregion
 
+# region Security
+
 ALLOWED_HOSTS = [
     "*"
 ]
+
+# endregion
 
 # region Web Server
 
