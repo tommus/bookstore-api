@@ -23,6 +23,7 @@ INSTALLED_APPS += [
     "bookstore.account.apps.AccountConfig",
     "bookstore.author.apps.AuthorConfig",
     "bookstore.book.apps.BookConfig",
+    "bookstore.docs.apps.DocsConfig",
     "bookstore.publisher.apps.PublisherConfig",
 ]
 
@@ -103,15 +104,15 @@ STATICFILES_DIRS = (
 
 REST_FRAMEWORK = {
 
+    # Defines date time format.
+    "DATETIME_FORMAT": "iso-8601",
+
     # Defines default authentication method.
     "DEFAULT_AUTHENTICATION_CLASSES": (
 
         # Django.
         "rest_framework.authentication.SessionAuthentication",
     ),
-
-    # Defines date time format.
-    "DATETIME_FORMAT": "iso-8601",
 }
 
 # endregion

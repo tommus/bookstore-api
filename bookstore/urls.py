@@ -30,6 +30,12 @@ urlpatterns = [
         view=include("bookstore.book.urls", namespace="book")
     ),
 
+    # Attaches docs API urls.
+    path(
+        route="",
+        view=include("bookstore.docs.urls", namespace="docs")
+    ),
+
     # Attaches publisher API urls.
     path(
         route="",
