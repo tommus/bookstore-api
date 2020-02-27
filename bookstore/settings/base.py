@@ -17,6 +17,10 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     # endregion
+
+    # region REST Documentation
+    "drf_yasg",
+    # endregion
 ]
 
 INSTALLED_APPS += [

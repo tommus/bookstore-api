@@ -4,7 +4,6 @@ from bookstore.settings.base import *
 
 INSTALLED_APPS += [
     "django_extensions",
-    "drf_yasg",
 ]
 
 # endregion
