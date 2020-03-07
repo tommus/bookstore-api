@@ -37,7 +37,6 @@ LOGGING = {
         },
         "rotating": {
             "backupCount": 14,
-            "maxBytes": 1024 * 1024 * 10,
             "class": "logging.handlers.TimedRotatingFileHandler",
             "filename": os.path.join(LOGS_DIR, "debug.log"),
             "level": "DEBUG",
