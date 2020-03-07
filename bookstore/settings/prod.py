@@ -32,18 +32,21 @@ LOGGING = {
     "disable_existing_loggers": False,
     "handlers": {
         "console": {
-            "level": "DEBUG",
             "class": "logging.StreamHandler",
-        },
-        "file": {
             "level": "DEBUG",
-            "class": "logging.FileHandler",
+        },
+        "rotating": {
+            "backupCount": 14,
+            "maxBytes": 1024 * 1024 * 10,
+            "class": "logging.handlers.TimedRotatingFileHandler",
             "filename": os.path.join(LOGS_DIR, "debug.log"),
+            "level": "DEBUG",
+            "when": "midnight",
         }
     },
     "loggers": {
         "django": {
-            "handlers": ["console", "file"],
+            "handlers": ["console", "rotating"],
             "propagate": True,
         },
     },
