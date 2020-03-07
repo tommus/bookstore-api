@@ -51,6 +51,16 @@ LOGGING = {
 
 # endregion
 
+# region Search
+
+ELASTICSEARCH_DSL = {
+    "default": {
+        "hosts": "localhost:9200"
+    }
+}
+
+# endregion
+
 # region Secret
 
 SECRET_KEY = "bc!!9(w5vs2+5-n%8fd=4b3s^81pxl=d(h%)wkkor)nc-=8)#x"
