@@ -1,8 +1,34 @@
+from django.utils.decorators import method_decorator
+from django_elasticsearch_dsl_drf.constants import (
+    LOOKUP_FILTER_RANGE,
+    LOOKUP_QUERY_IN,
+    LOOKUP_QUERY_GT,
+    LOOKUP_QUERY_GTE,
+    LOOKUP_QUERY_LT,
+    LOOKUP_QUERY_LTE,
+    SUGGESTER_COMPLETION,
+    LOOKUP_FILTER_FUZZY,
+    LOOKUP_FILTER_WILDCARD,
+    LOOKUP_QUERY_CONTAINS,
+    LOOKUP_QUERY_STARTSWITH,
+    LOOKUP_QUERY_ENDSWITH,
+    SUGGESTER_TERM, SUGGESTER_PHRASE)
+from django_elasticsearch_dsl_drf.filter_backends import (
+    CompoundSearchFilterBackend,
+    FilteringFilterBackend,
+    OrderingFilterBackend,
+    DefaultOrderingFilterBackend,
+    IdsFilterBackend,
+    SuggesterFilterBackend
+)
+from django_elasticsearch_dsl_drf.pagination import PageNumberPagination
+from django_elasticsearch_dsl_drf.viewsets import DocumentViewSet
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
 
+from bookstore.author.documents import AuthorDocument
 from bookstore.author.models import Author
-from bookstore.author.serializers import AuthorSerializer
+from bookstore.author.serializers import AuthorSerializer, AuthorDocumentSerializer
 from bookstore.common.pagination import CursorHashPagination
 
 
@@ -10,39 +36,137 @@ class AuthorPagination(CursorHashPagination):
     page_size = 25
 
 
+@method_decorator(
+    name="create",
+    decorator=swagger_auto_schema(auto_schema=None)
+)
+@method_decorator(
+    name="destroy",
+    decorator=swagger_auto_schema(auto_schema=None)
+)
+@method_decorator(
+    name="list",
+    decorator=swagger_auto_schema(
+        operation_id="List authors",
+        operation_summary="List authors (pageable)",
+        operation_description="Allows to retrieve a list of authors.",
+        tags=["authors"],
+    )
+)
+@method_decorator(
+    name="partial_update",
+    decorator=swagger_auto_schema(auto_schema=None)
+)
+@method_decorator(
+    name="retrieve",
+    decorator=swagger_auto_schema(
+        operation_id="Author details",
+        operation_summary="Author details",
+        operation_description="Allows to retrieve a details on given author.",
+        tags=["authors"],
+    )
+)
+@method_decorator(
+    name="update",
+    decorator=swagger_auto_schema(auto_schema=None)
+)
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
     pagination_class = AuthorPagination
 
-    @swagger_auto_schema(
-        operation_id="List authors",
-        operation_summary="List authors (pageable)",
-        operation_description="Allows to retrieve a list of authors.",
-    )
-    def list(self, request, *args, **kwargs):
-        return super().list(request, *args, **kwargs)
 
-    @swagger_auto_schema(
-        operation_id="Author details",
-        operation_summary="Author details",
-        operation_description="Allows to retrieve a details on given author.",
-    )
-    def retrieve(self, request, *args, **kwargs):
-        return super().retrieve(request, *args, **kwargs)
+# TODO: Reveal methods.
 
-    @swagger_auto_schema(auto_schema=None)
-    def create(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs)
-
-    @swagger_auto_schema(auto_schema=None)
-    def update(self, request, *args, **kwargs):
-        return super().update(request, *args, **kwargs)
-
-    @swagger_auto_schema(auto_schema=None)
-    def partial_update(self, request, *args, **kwargs):
-        return super().partial_update(request, *args, **kwargs)
-
-    @swagger_auto_schema(auto_schema=None)
-    def destroy(self, request, *args, **kwargs):
-        return super().destroy(request, *args, **kwargs)
+@method_decorator(
+    name="functional_suggest",
+    decorator=swagger_auto_schema(auto_schema=None)
+)
+@method_decorator(
+    name="list",
+    decorator=swagger_auto_schema(auto_schema=None)
+)
+@method_decorator(
+    name="retrieve",
+    decorator=swagger_auto_schema(auto_schema=None)
+)
+@method_decorator(
+    name="suggest",
+    decorator=swagger_auto_schema(auto_schema=None)
+)
+class AuthorSearchViewSet(DocumentViewSet):
+    document = AuthorDocument
+    filter_backends = [
+        CompoundSearchFilterBackend,
+        DefaultOrderingFilterBackend,
+        FilteringFilterBackend,
+        IdsFilterBackend,
+        OrderingFilterBackend,
+        SuggesterFilterBackend,
+    ]
+    filter_fields = {
+        "id": {
+            "field": "id",
+            "lookups": [
+                LOOKUP_FILTER_RANGE,
+                LOOKUP_QUERY_IN,
+                LOOKUP_QUERY_GT,
+                LOOKUP_QUERY_GTE,
+                LOOKUP_QUERY_LT,
+                LOOKUP_QUERY_LTE,
+            ]
+        },
+        "first_name": {
+            "field": "first_name.raw",
+            "lookups": [
+                LOOKUP_FILTER_FUZZY,
+                LOOKUP_FILTER_WILDCARD,
+                LOOKUP_QUERY_CONTAINS,
+                LOOKUP_QUERY_ENDSWITH,
+                LOOKUP_QUERY_IN,
+                LOOKUP_QUERY_STARTSWITH,
+            ]
+        },
+        "last_name": "last_name.raw",
+    }
+    lookup_field = "id"
+    ordering = ("id", "first_name", "last_name",)
+    ordering_fields = {
+        "id": "id",
+        "first_name": "first_name.raw",
+        "last_name": "last_name.raw",
+    }
+    pagination_class = PageNumberPagination
+    multi_match_search_fields = {
+        "first_name": {"boost": 4},
+        "last_name": {"boost": 2},
+    }
+    search_fields = {
+        "first_name": {"boost": 4},
+        "last_name": {"boost": 2},
+    }
+    serializer_class = AuthorDocumentSerializer
+    suggester_fields = {
+        "first_name_suggest": {
+            "field": "first_name.suggest",
+            "options": {
+                "size": 20
+            },
+            "suggesters": [
+                SUGGESTER_COMPLETION,
+                SUGGESTER_TERM,
+                SUGGESTER_PHRASE,
+            ]
+        },
+        "last_name_suggest": {
+            "field": "last_name.suggest",
+            "options": {
+                "size": 20
+            },
+            "suggesters": [
+                SUGGESTER_COMPLETION,
+                SUGGESTER_TERM,
+                SUGGESTER_PHRASE,
+            ]
+        }
+    }

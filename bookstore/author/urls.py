@@ -1,12 +1,20 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from bookstore.author.views import AuthorViewSet
+from bookstore.author.views import AuthorViewSet, AuthorSearchViewSet
 
 app_name = "author"
 
 router = DefaultRouter()
-router.register("authors", AuthorViewSet)
+router.register(
+    prefix="authors",
+    viewset=AuthorViewSet
+)
+router.register(
+    basename="authors_search",
+    prefix="search/authors",
+    viewset=AuthorSearchViewSet
+)
 
 urlpatterns = [
 
