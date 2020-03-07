@@ -1,5 +1,7 @@
+from django_elasticsearch_dsl_drf.serializers import DocumentSerializer
 from rest_framework import serializers
 
+from bookstore.author.documents import AuthorDocument
 from bookstore.author.models import Author
 
 
@@ -11,3 +13,13 @@ class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         fields = ("id", "first_name", "last_name",)
+
+
+class AuthorDocumentSerializer(DocumentSerializer):
+    class Meta:
+        document = AuthorDocument
+        fields = (
+            "id",
+            "first_name",
+            "last_name",
+        )

@@ -21,6 +21,11 @@ INSTALLED_APPS = [
     # region REST Documentation
     "drf_yasg",
     # endregion
+
+    # region Search
+    "django_elasticsearch_dsl",
+    "django_elasticsearch_dsl_drf",
+    # endregion
 ]
 
 INSTALLED_APPS += [
@@ -44,6 +49,15 @@ SWAGGER_SETTINGS = {
     # Configures logout endpoint so it is possible to tear down the
     # session from Swagger.
     "LOGOUT_URL": "/admin/logout/",
+
+    # Points out the bearer token is used to authenticate requests.
+    "SECURITY_DEFINITIONS": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
 }
 
 REDOC_SETTINGS = {
