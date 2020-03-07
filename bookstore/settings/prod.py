@@ -36,7 +36,7 @@ LOGGING = {
             "class": "logging.StreamHandler",
         },
         "file": {
-            "level": "INFO",
+            "level": "DEBUG",
             "class": "logging.FileHandler",
             "filename": os.path.join(LOGS_DIR, "debug.log"),
         }
