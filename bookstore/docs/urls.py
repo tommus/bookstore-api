@@ -21,13 +21,13 @@ urlpatterns = [
 
     # Attaches docs API urls.
     path(
-        route="docs/redoc",
+        route="docs/",
         view=schema_view.with_ui("redoc", cache_timeout=0)
     ),
 
     # Attaches swagger API urls.
     path(
-        route="docs/swagger",
+        route="playground/",
         view=schema_view.with_ui("swagger", cache_timeout=0)
     ),
 ]
