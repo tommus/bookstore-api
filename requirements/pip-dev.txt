@@ -1,0 +1,3 @@
+django-extensions
+drf-yasg
+faker
