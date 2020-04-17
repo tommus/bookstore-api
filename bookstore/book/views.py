@@ -1,12 +1,22 @@
 from django.utils.decorators import method_decorator
+from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
+from rest_framework.status import HTTP_200_OK, HTTP_404_NOT_FOUND
 
 from bookstore.book.models import Binding, Book
+from bookstore.book.schemas import (
+    schema_book_list_query,
+    schema_book_list_response,
+    schema_book_details_path,
+    schema_book_details_response,
+)
 from bookstore.book.serializers import BindingSerializer, BookListSerializer
 from bookstore.common.pagination import CursorHashPagination
+from bookstore.common.schemas import schema_error
 
 
+# noinspection PyTypeChecker
 @method_decorator(
     name="create",
     decorator=swagger_auto_schema(auto_schema=None)
@@ -51,6 +61,7 @@ class BookPagination(CursorHashPagination):
     page_size = 25
 
 
+# noinspection PyTypeChecker
 @method_decorator(
     name="create",
     decorator=swagger_auto_schema(auto_schema=None)
@@ -62,9 +73,17 @@ class BookPagination(CursorHashPagination):
 @method_decorator(
     name="list",
     decorator=swagger_auto_schema(
+        manual_parameters=schema_book_list_query,
         operation_id="List books",
         operation_summary="List books (pageable)",
         operation_description="Allows to retrieve a list of books.",
+        responses={
+            HTTP_200_OK: openapi.Response(
+                description="Request finished successfully.",
+                schema=schema_book_list_response,
+            ),
+        },
+        security=[],
         tags=["books"],
     )
 )
@@ -75,9 +94,21 @@ class BookPagination(CursorHashPagination):
 @method_decorator(
     name="retrieve",
     decorator=swagger_auto_schema(
+        manual_parameters=schema_book_details_path,
         operation_id="Book details",
         operation_summary="Book details",
         operation_description="Allows to retrieve a details on given book.",
+        responses={
+            HTTP_200_OK: openapi.Response(
+                description="Request finished successfully.",
+                schema=schema_book_details_response,
+            ),
+            HTTP_404_NOT_FOUND: openapi.Response(
+                description="Author with given `id` not found.",
+                schema=schema_error("not_found"),
+            ),
+        },
+        security=[],
         tags=["books"],
     )
 )
