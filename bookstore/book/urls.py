@@ -1,7 +1,8 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from bookstore.book.views import BindingViewSet, BookViewSet
+from bookstore.book.views.bindings import BindingViewSet
+from bookstore.book.views.books import BookViewSet
 
 app_name = "book"
 

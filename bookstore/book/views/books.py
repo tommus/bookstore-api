@@ -4,57 +4,16 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
 from rest_framework.status import HTTP_200_OK, HTTP_404_NOT_FOUND
 
-from bookstore.book.models import Binding, Book
-from bookstore.book.schemas import (
+from bookstore.book.models import Book
+from bookstore.book.schemas.books import (
     schema_book_list_query,
     schema_book_list_response,
     schema_book_details_path,
     schema_book_details_response,
 )
-from bookstore.book.serializers import BindingSerializer, BookListSerializer
+from bookstore.book.serializers import BookListSerializer
 from bookstore.common.pagination import CursorHashPagination
 from bookstore.common.schemas import schema_error
-
-
-# noinspection PyTypeChecker
-@method_decorator(
-    name="create",
-    decorator=swagger_auto_schema(auto_schema=None)
-)
-@method_decorator(
-    name="destroy",
-    decorator=swagger_auto_schema(auto_schema=None)
-)
-@method_decorator(
-    name="list",
-    decorator=swagger_auto_schema(
-        operation_id="List bindings",
-        operation_summary="List bindings (pageable)",
-        operation_description="Allows to retrieve a list of bindings.",
-        tags=["books"],
-    )
-)
-@method_decorator(
-    name="partial_update",
-    decorator=swagger_auto_schema(auto_schema=None)
-)
-@method_decorator(
-    name="retrieve",
-    decorator=swagger_auto_schema(
-        operation_id="Binding details",
-        operation_summary="Binding details",
-        operation_description="Allows to retrieve a details on given binding.",
-        tags=["books"],
-    )
-)
-@method_decorator(
-    name="update",
-    decorator=swagger_auto_schema(auto_schema=None)
-)
-class BindingViewSet(viewsets.ModelViewSet):
-    queryset = Binding.objects.all()
-    serializer_class = BindingSerializer
-    pagination_class = None
 
 
 class BookPagination(CursorHashPagination):
@@ -74,7 +33,7 @@ class BookPagination(CursorHashPagination):
     name="list",
     decorator=swagger_auto_schema(
         manual_parameters=schema_book_list_query,
-        operation_id="List books",
+        operation_id="book:list",
         operation_summary="List books (pageable)",
         operation_description="Allows to retrieve a list of books.",
         responses={
@@ -95,7 +54,7 @@ class BookPagination(CursorHashPagination):
     name="retrieve",
     decorator=swagger_auto_schema(
         manual_parameters=schema_book_details_path,
-        operation_id="Book details",
+        operation_id="book:details",
         operation_summary="Book details",
         operation_description="Allows to retrieve a details on given book.",
         responses={
@@ -104,7 +63,7 @@ class BookPagination(CursorHashPagination):
                 schema=schema_book_details_response,
             ),
             HTTP_404_NOT_FOUND: openapi.Response(
-                description="Author with given `id` not found.",
+                description="Book with given `id` not found.",
                 schema=schema_error("not_found"),
             ),
         },
