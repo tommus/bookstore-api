@@ -58,6 +58,7 @@ from bookstore.common.schemas import schema_error
                 schema=schema_error("not_found"),
             ),
         },
+        security=[],
         tags=["books"],
     )
 )
