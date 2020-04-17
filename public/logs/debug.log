@@ -1,5 +1,29 @@
 Watching for file changes with StatReloader
-"GET /api/bookstore/authors/ HTTP/1.1" 200 13541
-"GET /api/bookstore/authors/?cursor=cD0yMDIwLTAyLTI3KzA3JTNBNTclM0E0NC40ODA4MzIlMkIwMCUzQTAw HTTP/1.1" 200 14185
-"GET /api/bookstore/authors/?cursor=cD0yMDIwLTAyLTI3KzA3JTNBNTclM0E0NC40NDg1OTElMkIwMCUzQTAw HTTP/1.1" 200 14170
-"GET /api/bookstore/authors/?cursor=cD0yMDIwLTAyLTI3KzA3JTNBNTclM0E0NC40MTY5OTklMkIwMCUzQTAw HTTP/1.1" 200 14160
+/home/tommus/Kod/github/bookstore-api/bookstore/account/views.py changed, reloading.
+Watching for file changes with StatReloader
+"POST /api/account/login/ HTTP/1.1" 200 59
+/home/tommus/Kod/github/bookstore-api/bookstore/account/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/tommus/Kod/github/bookstore-api/bookstore/account/views.py changed, reloading.
+Watching for file changes with StatReloader
+Unauthorized: /api/account/login/
+"POST /api/account/login/ HTTP/1.1" 401 55
+/home/tommus/Kod/github/bookstore-api/bookstore/account/views.py changed, reloading.
+Watching for file changes with StatReloader
+Bad Request: /api/account/login/
+"POST /api/account/login/ HTTP/1.1" 400 91
+/home/tommus/Kod/github/bookstore-api/bookstore/account/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/tommus/Kod/github/bookstore-api/bookstore/account/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /docs/ HTTP/1.1" 200 995
+"GET /docs/?format=openapi HTTP/1.1" 200 8150
+"GET /static/drf-yasg/redoc/redoc-logo.png HTTP/1.1" 200 4969
+/home/tommus/Kod/github/bookstore-api/bookstore/account/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /docs/ HTTP/1.1" 200 995
+"GET /docs/?format=openapi HTTP/1.1" 200 9010
+"GET /static/drf-yasg/redoc/redoc-logo.png HTTP/1.1" 200 4969
+/home/tommus/Kod/github/bookstore-api/bookstore/settings/base.py changed, reloading.
+Watching for file changes with StatReloader
+/home/tommus/Kod/github/bookstore-api/bookstore/settings/dev.py changed, reloading.
