@@ -152,6 +152,9 @@ REST_FRAMEWORK = {
         # Django.
         "rest_framework.authentication.SessionAuthentication",
     ),
+
+    # Defines custom exception handler.
+    "EXCEPTION_HANDLER": "bookstore.common.exceptions.exception_handler",
 }
 
 # endregion

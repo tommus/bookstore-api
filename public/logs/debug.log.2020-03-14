@@ -1,0 +1,5 @@
+Watching for file changes with StatReloader
+"GET /api/bookstore/authors/ HTTP/1.1" 200 13541
+"GET /api/bookstore/authors/?cursor=cD0yMDIwLTAyLTI3KzA3JTNBNTclM0E0NC40ODA4MzIlMkIwMCUzQTAw HTTP/1.1" 200 14185
+"GET /api/bookstore/authors/?cursor=cD0yMDIwLTAyLTI3KzA3JTNBNTclM0E0NC40NDg1OTElMkIwMCUzQTAw HTTP/1.1" 200 14170
+"GET /api/bookstore/authors/?cursor=cD0yMDIwLTAyLTI3KzA3JTNBNTclM0E0NC40MTY5OTklMkIwMCUzQTAw HTTP/1.1" 200 14160
