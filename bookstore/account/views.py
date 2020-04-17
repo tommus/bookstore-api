@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate
 from django.utils.decorators import method_decorator
 from drf_yasg import openapi
-from drf_yasg.utils import swagger_auto_schema
+from drf_yasg.utils import swagger_auto_schema, unset
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.status import (
@@ -40,6 +40,7 @@ from bookstore.common.schemas import schema_error
                 schema=schema_register_validation_error,
             ),
         },
+        security=[],
         tags=["account"],
     )
 )
@@ -68,6 +69,7 @@ class RegisterAccountView(generics.CreateAPIView):
                 schema=schema_error("invalid_credentials"),
             ),
         },
+        security=[],
         tags=["account"],
     )
 )
