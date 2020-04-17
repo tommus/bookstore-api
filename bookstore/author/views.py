@@ -23,19 +23,29 @@ from django_elasticsearch_dsl_drf.filter_backends import (
 )
 from django_elasticsearch_dsl_drf.pagination import PageNumberPagination
 from django_elasticsearch_dsl_drf.viewsets import DocumentViewSet
+from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
+from rest_framework.status import HTTP_200_OK, HTTP_404_NOT_FOUND
 
 from bookstore.author.documents import AuthorDocument
 from bookstore.author.models import Author
+from bookstore.author.schemas import (
+    schema_authors_list_query,
+    schema_authors_list_response,
+    schema_author_details_path,
+    schema_author_details_response,
+)
 from bookstore.author.serializers import AuthorSerializer, AuthorDocumentSerializer
 from bookstore.common.pagination import CursorHashPagination
+from bookstore.common.schemas import schema_error
 
 
 class AuthorPagination(CursorHashPagination):
     page_size = 25
 
 
+# noinspection PyTypeChecker
 @method_decorator(
     name="create",
     decorator=swagger_auto_schema(auto_schema=None)
@@ -47,9 +57,17 @@ class AuthorPagination(CursorHashPagination):
 @method_decorator(
     name="list",
     decorator=swagger_auto_schema(
-        operation_id="List authors",
+        manual_parameters=schema_authors_list_query,
+        operation_id="author:list",
         operation_summary="List authors (pageable)",
         operation_description="Allows to retrieve a list of authors.",
+        responses={
+            HTTP_200_OK: openapi.Response(
+                description="Request finished successfully.",
+                schema=schema_authors_list_response
+            ),
+        },
+        security=[],
         tags=["authors"],
     )
 )
@@ -60,9 +78,21 @@ class AuthorPagination(CursorHashPagination):
 @method_decorator(
     name="retrieve",
     decorator=swagger_auto_schema(
-        operation_id="Author details",
+        manual_parameters=schema_author_details_path,
+        operation_id="author:details",
         operation_summary="Author details",
         operation_description="Allows to retrieve a details on given author.",
+        responses={
+            HTTP_200_OK: openapi.Response(
+                description="Request finished successfully.",
+                schema=schema_author_details_response,
+            ),
+            HTTP_404_NOT_FOUND: openapi.Response(
+                description="Author with given `id` not found.",
+                schema=schema_error("not_found"),
+            ),
+        },
+        security=[],
         tags=["authors"],
     )
 )
@@ -78,6 +108,7 @@ class AuthorViewSet(viewsets.ModelViewSet):
 
 # TODO: Reveal methods.
 
+# noinspection PyTypeChecker
 @method_decorator(
     name="functional_suggest",
     decorator=swagger_auto_schema(auto_schema=None)
