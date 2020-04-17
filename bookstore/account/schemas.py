@@ -98,7 +98,6 @@ schema_login_request = Schema(
     properties={
         "username": Schema(
             description="Username that should be used during authentication.",
-            format=FORMAT_EMAIL,
             type=TYPE_STRING,
         ),
         "password": Schema(
