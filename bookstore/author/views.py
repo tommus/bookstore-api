@@ -31,8 +31,8 @@ from rest_framework.status import HTTP_200_OK, HTTP_404_NOT_FOUND
 from bookstore.author.documents import AuthorDocument
 from bookstore.author.models import Author
 from bookstore.author.schemas import (
-    schema_authors_list_query,
-    schema_authors_list_response,
+    schema_author_list_query,
+    schema_author_list_response,
     schema_author_details_path,
     schema_author_details_response,
 )
@@ -57,14 +57,14 @@ class AuthorPagination(CursorHashPagination):
 @method_decorator(
     name="list",
     decorator=swagger_auto_schema(
-        manual_parameters=schema_authors_list_query,
+        manual_parameters=schema_author_list_query,
         operation_id="author:list",
         operation_summary="List authors (pageable)",
         operation_description="Allows to retrieve a list of authors.",
         responses={
             HTTP_200_OK: openapi.Response(
                 description="Request finished successfully.",
-                schema=schema_authors_list_response
+                schema=schema_author_list_response,
             ),
         },
         security=[],
