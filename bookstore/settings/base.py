@@ -42,6 +42,9 @@ INSTALLED_APPS += [
 
 SWAGGER_SETTINGS = {
 
+    # Configures to show examples by default.
+    "DEFAULT_MODEL_RENDERING": "example",
+
     # Configures login endpoint so it is possible to authenticate
     # into service from Swagger.
     "LOGIN_URL": "/admin/login/",
@@ -111,14 +114,11 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 """Public dir location for http server."""
 PUBLIC_DIR = os.path.join(ROOT_DIR, "public")
 
-"""Temporary files location."""
-TMP_DIR = os.path.join(ROOT_DIR, "tmp")
-
 """Project files location."""
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 """Log files location."""
-LOGS_DIR = os.path.join(PUBLIC_DIR, "logs")
+LOGS_DIR = os.path.abspath("/var/log/bookstore/api")
 
 """Media files location."""
 MEDIA_ROOT = os.path.join(PUBLIC_DIR, "media")
@@ -127,12 +127,15 @@ MEDIA_ROOT = os.path.join(PUBLIC_DIR, "media")
 if not os.path.exists(MEDIA_ROOT):
     os.makedirs(MEDIA_ROOT)
 
+"""Temporary files location."""
+TMP_ROOT = os.path.join(ROOT_DIR, "tmp")
+
 """Create tmp directory if not exists."""
-if not os.path.exists(TMP_DIR):
-    os.makedirs(TMP_DIR)
+if not os.path.exists(TMP_ROOT):
+    os.makedirs(TMP_ROOT)
 
 """Static files location."""
-STATIC_ROOT = os.path.join(TMP_DIR, "static")
+STATIC_ROOT = os.path.join(TMP_ROOT, "static")
 STATICFILES_DIRS = (
     os.path.join(PUBLIC_DIR, "static"),
 )

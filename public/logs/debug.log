@@ -1,45 +1,29 @@
 Watching for file changes with StatReloader
+/home/tommus/Kod/github/bookstore-api/bookstore/account/views.py changed, reloading.
 Watching for file changes with StatReloader
-"GET /docs/ HTTP/1.1" 200 995
-"GET /static/drf-yasg/redoc/redoc-logo.png HTTP/1.1" 200 4969
-"GET /docs/?format=openapi HTTP/1.1" 200 7097
+"POST /api/account/login/ HTTP/1.1" 200 59
 /home/tommus/Kod/github/bookstore-api/bookstore/account/views.py changed, reloading.
 Watching for file changes with StatReloader
 /home/tommus/Kod/github/bookstore-api/bookstore/account/views.py changed, reloading.
 Watching for file changes with StatReloader
-"GET /docs/ HTTP/1.1" 200 995
-"GET /docs/?format=openapi HTTP/1.1" 200 8126
-"GET /static/drf-yasg/redoc/redoc-logo.png HTTP/1.1" 200 4969
-"POST /api/account/register/ HTTP/1.1" 201 97
-/home/tommus/Kod/github/bookstore-api/bookstore/account/schemas.py changed, reloading.
+Unauthorized: /api/account/login/
+"POST /api/account/login/ HTTP/1.1" 401 55
+/home/tommus/Kod/github/bookstore-api/bookstore/account/views.py changed, reloading.
 Watching for file changes with StatReloader
+Bad Request: /api/account/login/
+"POST /api/account/login/ HTTP/1.1" 400 91
+/home/tommus/Kod/github/bookstore-api/bookstore/account/views.py changed, reloading.
 Watching for file changes with StatReloader
-"GET /docs/ HTTP/1.1" 200 995
-"GET /docs/?format=openapi HTTP/1.1" 200 8421
-"GET /static/drf-yasg/redoc/redoc-logo.png HTTP/1.1" 200 4969
-"GET /docs/ HTTP/1.1" 200 995
-"GET /docs/?format=openapi HTTP/1.1" 200 8421
-"GET /static/drf-yasg/redoc/redoc-logo.png HTTP/1.1" 200 4969
-Unprocessable Entity: /api/account/register/
-"POST /api/account/register/ HTTP/1.1" 422 40
-/home/tommus/Kod/github/bookstore-api/bookstore/account/schemas.py changed, reloading.
-Watching for file changes with StatReloader
-/home/tommus/Kod/github/bookstore-api/bookstore/account/schemas.py changed, reloading.
-Watching for file changes with StatReloader
-"GET /docs/ HTTP/1.1" 200 995
-"GET /docs/?format=openapi HTTP/1.1" 200 8420
-"GET /static/drf-yasg/redoc/redoc-logo.png HTTP/1.1" 200 4969
-/home/tommus/Kod/github/bookstore-api/bookstore/account/schemas.py changed, reloading.
-Watching for file changes with StatReloader
-"GET /docs/ HTTP/1.1" 200 995
-"GET /docs/?format=openapi HTTP/1.1" 200 8475
-"GET /static/drf-yasg/redoc/redoc-logo.png HTTP/1.1" 200 4969
-Unprocessable Entity: /api/account/register/
-"POST /api/account/register/ HTTP/1.1" 422 58
-Unprocessable Entity: /api/account/register/
-"POST /api/account/register/ HTTP/1.1" 422 58
 /home/tommus/Kod/github/bookstore-api/bookstore/account/views.py changed, reloading.
 Watching for file changes with StatReloader
 "GET /docs/ HTTP/1.1" 200 995
 "GET /docs/?format=openapi HTTP/1.1" 200 8150
 "GET /static/drf-yasg/redoc/redoc-logo.png HTTP/1.1" 200 4969
+/home/tommus/Kod/github/bookstore-api/bookstore/account/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /docs/ HTTP/1.1" 200 995
+"GET /docs/?format=openapi HTTP/1.1" 200 9010
+"GET /static/drf-yasg/redoc/redoc-logo.png HTTP/1.1" 200 4969
+/home/tommus/Kod/github/bookstore-api/bookstore/settings/base.py changed, reloading.
+Watching for file changes with StatReloader
+/home/tommus/Kod/github/bookstore-api/bookstore/settings/dev.py changed, reloading.

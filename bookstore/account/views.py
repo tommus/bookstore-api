@@ -6,15 +6,18 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.status import (
     HTTP_201_CREATED,
-    HTTP_400_BAD_REQUEST,
     HTTP_422_UNPROCESSABLE_ENTITY,
+    HTTP_200_OK, HTTP_400_BAD_REQUEST,
 )
 from rest_framework.views import APIView
 
+from bookstore.account.exceptions import InvalidCredentials
 from bookstore.account.schemas import (
     schema_register_request,
     schema_register_response,
     schema_register_validation_error,
+    schema_login_request,
+    schema_login_response,
 )
 from bookstore.account.serializers import AccountSerializer
 from bookstore.common.schemas import schema_error
@@ -48,16 +51,31 @@ class RegisterAccountView(generics.CreateAPIView):
     serializer_class = AccountSerializer
 
 
+@method_decorator(
+    name="post",
+    decorator=swagger_auto_schema(
+        operation_id="account:login",
+        operation_summary="Sign in user",
+        operation_description="Allows to sign user into service.",
+        request_body=schema_login_request,
+        responses={
+            HTTP_200_OK: openapi.Response(
+                description="Sign in success.",
+                schema=schema_login_response,
+            ),
+            HTTP_400_BAD_REQUEST: openapi.Response(
+                description="Request failed.",
+                schema=schema_error("invalid_credentials"),
+            ),
+        },
+        tags=["account"],
+    )
+)
 class SignInView(APIView):
     """Signs in a user."""
 
     permission_classes = ()
 
-    @swagger_auto_schema(
-        operation_id="Sign In via Credentials",
-        operation_summary="Sign In via Credentials",
-        operation_description="Allows user to sign into service.",
-    )
     def post(self, request):
         username = request.data.get("username")
         password = request.data.get("password")
@@ -68,7 +86,4 @@ class SignInView(APIView):
                 status=status.HTTP_200_OK
             )
         else:
-            return Response(
-                data={"error": "Cannot authenticate with given credentials."},
-                status=status.HTTP_401_UNAUTHORIZED
-            )
+            raise InvalidCredentials()
