@@ -1,8 +1,23 @@
-django
-djangorestframework
+# API framework.
+djangorestframework==3.11.2
+
+# Environment and package management.
+pip==20.2.3
+virtualenv==20.0.34
+
+# Exploit prevention.
+psycopg2-binary
+
+# Imaging library.
+Pillow==7.2.0
+
+# Search engine.
 elasticsearch-dsl
 django-elasticsearch-dsl
 django-elasticsearch-dsl-drf
-gunicorn
-Pillow
-psycopg2-binary
+
+# Web framework.
+django==3.1.2
+
+# Web server gateway interface.
+gunicorn==20.0.4
