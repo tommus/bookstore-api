@@ -103,8 +103,7 @@ schema_book_details_response = Schema(
         ),
         "release_date": Schema(
             description="Book's release date.",
-            format=FORMAT_INT64,
-            type=TYPE_INTEGER,
+            type=TYPE_STRING,
         ),
         "available": Schema(
             description="An information whether given book is available for sell.",
