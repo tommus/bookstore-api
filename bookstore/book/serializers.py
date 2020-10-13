@@ -48,7 +48,7 @@ class BookDetailsSerializer(BookSerializer):
     class Meta:
         model = Book
         fields = (
-            "id", "title", "author", "publisher", "publication_year", "binding", "pages",
+            "id", "title", "author", "publisher", "publication_year", "binding", "pages", "cover",
             "format", "isbn", "ean", "release_date", "available", "price_base", "price_discounted",
-            "description", "cover"
+            "description"
         )

@@ -11,7 +11,7 @@ from bookstore.book.schemas.books import (
     schema_book_details_path,
     schema_book_details_response,
 )
-from bookstore.book.serializers import BookListSerializer
+from bookstore.book.serializers import BookListSerializer, BookDetailsSerializer
 from bookstore.common.pagination import CursorHashPagination
 from bookstore.common.schemas import schema_error
 
@@ -76,6 +76,13 @@ class BookPagination(CursorHashPagination):
     decorator=swagger_auto_schema(auto_schema=None)
 )
 class BookViewSet(viewsets.ModelViewSet):
-    queryset = Book.objects.all()
-    serializer_class = BookListSerializer
+    http_method_names = ["get"]
     pagination_class = BookPagination
+    queryset = Book.objects.all()
+    serializers = {
+        "list": BookListSerializer,
+        "retrieve": BookDetailsSerializer
+    }
+
+    def get_serializer_class(self):
+        return self.serializers[self.action]

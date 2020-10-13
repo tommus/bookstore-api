@@ -67,6 +67,7 @@ from bookstore.common.schemas import schema_error
     decorator=swagger_auto_schema(auto_schema=None)
 )
 class BindingViewSet(viewsets.ModelViewSet):
+    http_method_names = ["get"]
+    pagination_class = None
     queryset = Binding.objects.all()
     serializer_class = BindingSerializer
-    pagination_class = None
