@@ -19,7 +19,9 @@ services:
     networks:
       - bookstore
     volumes:
-      - ./src:/usr/src/bookstore
+      - ./src/:/usr/src/bookstore/
+      - bookstore_media:/usr/share/bookstore/media/
+      - bookstore_static:/usr/share/bookstore/static/
   database:
     image: postgres:13.0
     container_name: bookstore-database
@@ -38,9 +40,13 @@ services:
       - "8000:8000"
     volumes:
       - ./compose/nginx/conf.d/bookstore.conf:/etc/nginx/conf.d/bookstore.conf
-      - ./src:/usr/src/bookstore
+      - ./src/:/usr/src/bookstore/
+      - bookstore_media:/usr/share/bookstore/media/
+      - bookstore_static:/usr/share/bookstore/static/
     networks:
       - bookstore
 
 volumes:
+  bookstore_media: {}
+  bookstore_static: {}
   postgres_data: {}

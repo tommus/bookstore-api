@@ -18,9 +18,9 @@ RUN pip install \
     --requirement pip-dev.txt
 
 # Create directory for media and static files.
-RUN mkdir /usr/src/bookstore
-RUN mkdir /usr/src/bookstore/media
-RUN mkdir /usr/src/bookstore/static
+RUN mkdir /usr/src/bookstore/
+RUN mkdir -p /usr/share/bookstore/static/
+RUN mkdir -p /usr/share/bookstore/media/
 
 # Use application directory.
 WORKDIR /usr/src/bookstore

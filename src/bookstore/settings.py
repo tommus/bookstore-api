@@ -150,17 +150,11 @@ AUTH_PASSWORD_VALIDATORS = [
 """Repository files location."""
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-"""Public dir location for http server."""
-PUBLIC_DIR = os.path.join(ROOT_DIR, "public")
-
-"""Project files location."""
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 """Media files location."""
-MEDIA_ROOT = os.path.join(PUBLIC_DIR, "media")
+MEDIA_ROOT = os.environ.get("MEDIA_ROOT")
 
 """Static files location."""
-STATIC_ROOT = os.path.join(ROOT_DIR, "static")
+STATIC_ROOT = os.environ.get("STATIC_ROOT")
 
 # endregion
 
