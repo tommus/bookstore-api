@@ -1,0 +1,46 @@
+version: "3.8"
+
+networks:
+  bookstore:
+    driver: bridge
+
+services:
+  bookstore:
+    build:
+      context: .
+      dockerfile: ./compose/bookstore/Dockerfile
+    container_name: bookstore-api
+    depends_on:
+      - database
+    env_file:
+      - ./.envs/.bookstore
+    expose:
+      - "8000"
+    networks:
+      - bookstore
+    volumes:
+      - ./src:/usr/src/bookstore
+  database:
+    image: postgres:13.0
+    container_name: bookstore-database
+    env_file:
+      - ./.envs/.postgres
+    networks:
+      - bookstore
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+  nginx:
+    image: nginx:1.19.3
+    container_name: bookstore-nginx
+    depends_on:
+      - bookstore
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./compose/nginx/conf.d/bookstore.conf:/etc/nginx/conf.d/bookstore.conf
+      - ./src:/usr/src/bookstore
+    networks:
+      - bookstore
+
+volumes:
+  postgres_data: {}

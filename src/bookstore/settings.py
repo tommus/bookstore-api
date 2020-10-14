@@ -11,6 +11,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_extensions",
     # endregion
 
     # region REST
@@ -35,6 +36,44 @@ INSTALLED_APPS += [
     "bookstore.docs.apps.DocsConfig",
     "bookstore.publisher.apps.PublisherConfig",
 ]
+
+# endregion
+
+# region Database
+
+DATABASES = {
+    "default": {
+        "ENGINE": os.environ.get("DB_ENGINE"),
+        "NAME": os.environ.get("DB_NAME"),
+        "USER": os.environ.get("DB_USER"),
+        "PASSWORD": os.environ.get("DB_PASSWORD"),
+        "HOST": os.environ.get("DB_HOST"),
+        "PORT": os.environ.get("DB_PORT"),
+    }
+}
+
+# endregion
+
+# region Debug
+
+DEBUG = int(os.environ.get("DEBUG"))
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": "INFO",
+        },
+    },
+}
 
 # endregion
 
@@ -109,7 +148,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # region Paths
 
 """Repository files location."""
-ROOT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 """Public dir location for http server."""
 PUBLIC_DIR = os.path.join(ROOT_DIR, "public")
@@ -117,28 +156,11 @@ PUBLIC_DIR = os.path.join(ROOT_DIR, "public")
 """Project files location."""
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-"""Log files location."""
-LOGS_DIR = os.path.abspath("/var/log/bookstore/api")
-
 """Media files location."""
 MEDIA_ROOT = os.path.join(PUBLIC_DIR, "media")
 
-"""Create media directory if not exists."""
-if not os.path.exists(MEDIA_ROOT):
-    os.makedirs(MEDIA_ROOT)
-
-"""Temporary files location."""
-TMP_ROOT = os.path.join(ROOT_DIR, "tmp")
-
-"""Create tmp directory if not exists."""
-if not os.path.exists(TMP_ROOT):
-    os.makedirs(TMP_ROOT)
-
 """Static files location."""
-STATIC_ROOT = os.path.join(TMP_ROOT, "static")
-STATICFILES_DIRS = (
-    os.path.join(PUBLIC_DIR, "static"),
-)
+STATIC_ROOT = os.path.join(ROOT_DIR, "static")
 
 # endregion
 
@@ -159,6 +181,28 @@ REST_FRAMEWORK = {
     # Defines custom exception handler.
     "EXCEPTION_HANDLER": "bookstore.common.exceptions.exception_handler",
 }
+
+# endregion
+
+# region Search
+
+ELASTICSEARCH_DSL = {
+    "default": {
+        "hosts": "localhost:9200"
+    }
+}
+
+# endregion
+
+# region Secret
+
+SECRET_KEY = os.environ.get("SECRET_KEY")
+
+# endregion
+
+# region Security
+
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(",")
 
 # endregion
 
@@ -187,5 +231,11 @@ TEMPLATES = [
 ROOT_URLCONF = "bookstore.urls"
 MEDIA_URL = "/media/"
 STATIC_URL = "/static/"
+
+# endregion
+
+# region Web Server
+
+WSGI_APPLICATION = "bookstore.wsgi.application"
 
 # endregion
