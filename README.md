@@ -2,18 +2,6 @@
 
 Bookstore API.
 
-## Select flavor
-
-1. Export environment value to select flavor:
-
-```bash
-export BKS_FLAVOR="<flavor>"
-```
-
-Available flavors:
-
-- dev
-
 ## Backend management
 
 1. Create virtual environment:
