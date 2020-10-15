@@ -17,7 +17,7 @@ services:
       - database
     env_file:
       - ./.envs/.bookstore
-    - networks:
+    networks:
       - bookstore
     ports:
       - "127.0.0.1:8000:8000"
