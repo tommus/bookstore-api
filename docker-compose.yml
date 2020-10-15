@@ -17,10 +17,11 @@ services:
       - database
     env_file:
       - ./.envs/.bookstore
+    - networks:
+      - bookstore
     ports:
       - "127.0.0.1:8000:8000"
-    networks:
-      - bookstore
+    restart: always
     volumes:
       - ./src/:/usr/src/bookstore/
       - bookstore_media:/usr/share/bookstore/media/
@@ -32,6 +33,7 @@ services:
       - ./.envs/.postgres
     networks:
       - bookstore
+    restart: always
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 
