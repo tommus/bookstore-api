@@ -17,8 +17,8 @@ services:
       - database
     env_file:
       - ./.envs/.bookstore
-    expose:
-      - "8000"
+    ports:
+      - "127.0.0.1:8000:8000"
     networks:
       - bookstore
     volumes:
@@ -34,19 +34,6 @@ services:
       - bookstore
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-  nginx:
-    image: nginx:1.19.3
-    container_name: bookstore-nginx
-    depends_on:
-      - bookstore
-    networks:
-      - bookstore
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./compose/nginx/conf.d/bookstore.conf:/etc/nginx/conf.d/bookstore.conf
-      - bookstore_media:/usr/share/bookstore/media/
-      - bookstore_static:/usr/share/bookstore/static/
 
 volumes:
   bookstore_media: {}
