@@ -3,6 +3,9 @@ version: "3.8"
 networks:
   bookstore:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.0/29
 
 services:
   bookstore:
@@ -36,15 +39,14 @@ services:
     container_name: bookstore-nginx
     depends_on:
       - bookstore
+    networks:
+      - bookstore
     ports:
       - "8000:8000"
     volumes:
       - ./compose/nginx/conf.d/bookstore.conf:/etc/nginx/conf.d/bookstore.conf
-      - ./src/:/usr/src/bookstore/
       - bookstore_media:/usr/share/bookstore/media/
       - bookstore_static:/usr/share/bookstore/static/
-    networks:
-      - bookstore
 
 volumes:
   bookstore_media: {}

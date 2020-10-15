@@ -24,8 +24,8 @@ INSTALLED_APPS = [
     # endregion
 
     # region Search
-    "django_elasticsearch_dsl",
-    "django_elasticsearch_dsl_drf",
+    #"django_elasticsearch_dsl",
+    #"django_elasticsearch_dsl_drf",
     # endregion
 ]
 

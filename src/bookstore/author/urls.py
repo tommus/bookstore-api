@@ -10,11 +10,11 @@ router.register(
     prefix="authors",
     viewset=AuthorViewSet
 )
-router.register(
-    basename="authors_search",
-    prefix="search/authors",
-    viewset=AuthorSearchViewSet
-)
+# router.register(
+#     basename="authors_search",
+#     prefix="search/authors",
+#     viewset=AuthorSearchViewSet
+# )
 
 urlpatterns = [
 
