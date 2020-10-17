@@ -1,5 +1,8 @@
 FROM python:3.9.0
 
+# Expose service port.
+EXPOSE 8000
+
 # Use temporary directory.
 WORKDIR /tmp
 
