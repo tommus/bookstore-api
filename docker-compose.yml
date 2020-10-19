@@ -24,7 +24,8 @@ services:
       - bookstore
     restart: always
     volumes:
-      - ./src/:/usr/src/bookstore/
+      - ./manage.py:/usr/src/bookstore/manage.py
+      - ./bookstore/:/usr/src/bookstore/bookstore/
       - bookstore_media:/usr/share/bookstore/media/
       - bookstore_static:/usr/share/bookstore/static/
   database:
@@ -36,9 +37,12 @@ services:
       - bookstore
     restart: always
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - bookstore_database_data:/var/lib/postgresql/data/
 
 volumes:
-  bookstore_media: {}
-  bookstore_static: {}
-  postgres_data: {}
+  bookstore_media:
+    name: bookstore-media
+  bookstore_static:
+    name: bookstore-static
+  bookstore_database_data:
+    name: bookstore-database
