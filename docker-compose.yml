@@ -10,12 +10,14 @@ networks:
 
 services:
   bookstore:
+    image: bookstore:0.0.1
     build:
       context: .
       dockerfile: ./compose/bookstore/Dockerfile
     container_name: bookstore-api
     depends_on:
       - database
+      - search_engine
     env_file:
       - ./.envs/.bookstore
     expose:
@@ -38,6 +40,25 @@ services:
     restart: always
     volumes:
       - bookstore_database_data:/var/lib/postgresql/data/
+  search_engine:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.3
+    container_name: bookstore-search-engine
+    depends_on:
+      - broker
+    env_file:
+      - ./.envs/.elasticsearch
+    expose:
+      - 9200
+    networks:
+      - bookstore
+    restart: always
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - bookstore_search_engine_data:/usr/share/elasticsearch/data
+
 
 volumes:
   bookstore_media:
@@ -46,3 +67,5 @@ volumes:
     name: bookstore-static
   bookstore_database_data:
     name: bookstore-database
+  bookstore_search_engine_data:
+    name: bookstore-search-engine

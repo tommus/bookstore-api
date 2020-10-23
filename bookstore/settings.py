@@ -19,13 +19,13 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     # endregion
 
-    # region REST Documentation
-    "drf_yasg",
+    # region Search Engine
+    "django_elasticsearch_dsl",
+    "django_elasticsearch_dsl_drf",
     # endregion
 
-    # region Search
-    #"django_elasticsearch_dsl",
-    #"django_elasticsearch_dsl_drf",
+    # region REST Documentation
+    "drf_yasg",
     # endregion
 ]
 
@@ -178,12 +178,15 @@ REST_FRAMEWORK = {
 
 # endregion
 
-# region Search
+# region Search Engine
 
 ELASTICSEARCH_DSL = {
     "default": {
-        "hosts": "localhost:9200"
-    }
+        "hosts": "{}:{}".format(
+            os.environ.get("SEARCH_ENGINE_HOST"),
+            os.environ.get("SEARCH_ENGINE_PORT")
+        )
+    },
 }
 
 # endregion
