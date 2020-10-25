@@ -1,6 +1,6 @@
 from django.urls import path
 
-from docs.urls.common import schema_view
+from bookstore.docs.urls.common import schema_view
 
 app_name = "docs"
 
