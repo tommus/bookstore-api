@@ -20,8 +20,8 @@ services:
       - search_engine
     env_file:
       - ./.envs/.bookstore
-    ports:
-      - 0.0.0.0:8000:8000
+    expose:
+      - 8000
     networks:
       - bookstore
     restart: always
