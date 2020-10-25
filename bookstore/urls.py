@@ -39,13 +39,13 @@ urlpatterns = [
     # Attaches docs API urls.
     path(
         route="api/v1/docs/",
-        view=include("bookstore.docs.urls.docs", namespace="v1")
+        view=include("bookstore.docs.urls.redoc", namespace="v1")
     ),
 
     # Attaches playground API urls.
     path(
         route="api/v1/playground/",
-        view=include("bookstore.docs.urls.playground", namespace="v1")
+        view=include("bookstore.docs.urls.swagger", namespace="v1")
     ),
 
     # Attaches publishers API urls.
