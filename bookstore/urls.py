@@ -12,34 +12,46 @@ urlpatterns = [
         view=admin.site.urls
     ),
 
-    # Attaches account API urls.
+    # Attaches accounts API urls.
     path(
-        route="",
-        view=include("bookstore.account.urls", namespace="account")
+        route="api/v1/accounts/",
+        view=include("bookstore.accounts.urls", namespace="v1")
     ),
 
-    # Attaches author API urls.
+    # Attaches authors API urls.
     path(
-        route="",
-        view=include("bookstore.author.urls", namespace="author")
+        route="api/v1/authors/",
+        view=include("bookstore.authors.urls", namespace="v1")
     ),
 
-    # Attaches book API urls.
+    # Attaches bindings API urls.
     path(
-        route="",
-        view=include("bookstore.book.urls", namespace="book")
+        route="api/v1/bindings/",
+        view=include("bookstore.bindings.urls", namespace="v1")
+    ),
+
+    # Attaches books API urls.
+    path(
+        route="api/v1/books/",
+        view=include("bookstore.books.urls", namespace="v1")
     ),
 
     # Attaches docs API urls.
     path(
-        route="",
-        view=include("bookstore.docs.urls", namespace="docs")
+        route="api/v1/docs/",
+        view=include("bookstore.docs.urls.docs", namespace="v1")
     ),
 
-    # Attaches publisher API urls.
+    # Attaches playground API urls.
     path(
-        route="",
-        view=include("bookstore.publisher.urls", namespace="publisher")
+        route="api/v1/playground/",
+        view=include("bookstore.docs.urls.playground", namespace="v1")
+    ),
+
+    # Attaches publishers API urls.
+    path(
+        route="api/v1/publishers/",
+        view=include("bookstore.publishers.urls", namespace="v1")
     ),
 ]
 

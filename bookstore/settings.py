@@ -30,11 +30,12 @@ INSTALLED_APPS = [
 ]
 
 INSTALLED_APPS += [
-    "bookstore.account.apps.AccountConfig",
-    "bookstore.author.apps.AuthorConfig",
-    "bookstore.book.apps.BookConfig",
+    "bookstore.accounts.apps.AccountsConfig",
+    "bookstore.authors.apps.AuthorsConfig",
+    "bookstore.bindings.apps.BindingsConfig",
+    "bookstore.books.apps.BooksConfig",
     "bookstore.docs.apps.DocsConfig",
-    "bookstore.publisher.apps.PublisherConfig",
+    "bookstore.publishers.apps.PublishersConfig",
 ]
 
 # endregion
@@ -56,6 +57,7 @@ DATABASES = {
 
 # region Debug
 
+print(os.environ.get("DEBUG"))
 DEBUG = int(os.environ.get("DEBUG"))
 
 LOGGING = {
@@ -174,6 +176,9 @@ REST_FRAMEWORK = {
 
     # Defines custom exception handler.
     "EXCEPTION_HANDLER": "bookstore.common.exceptions.exception_handler",
+
+    # Defines default versioning scheme.
+    "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.NamespaceVersioning",
 }
 
 # endregion
