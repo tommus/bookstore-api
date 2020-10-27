@@ -49,7 +49,7 @@ schema_author_list_response = Schema(
                     type=TYPE_INTEGER
                 ),
                 "offset": Schema(
-                    description="Additional information about pagination indexes",
+                    description="Additional information about pagination indices.",
                     properties={
                         "current": Schema(
                             description="Index used to retrieve current page.",
