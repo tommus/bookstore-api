@@ -2,15 +2,15 @@ from base64 import b64encode
 from collections import OrderedDict
 from urllib import parse
 
+from django_elasticsearch_dsl_drf import pagination
 from rest_framework.pagination import CursorPagination, Cursor
 from rest_framework.response import Response
 
 
 class CursorHashPagination(CursorPagination):
-    """
-    The cursor pagination implementation that returns
-    just cursor query parameters in place of the entire urls.
-    """
+    """The cursor pagination implementation that returns
+    just cursor query parameters in place of the entire
+    urls."""
 
     def get_next_cursor(self):
         if not self.has_next:
@@ -140,3 +140,46 @@ class CursorHashPagination(CursorPagination):
             ("previous", self.get_previous_cursor()),
             ("results", data),
         ]))
+
+
+class LimitOffsetPagination(pagination.LimitOffsetPagination):
+    """The limit offset pagination implementation that do
+    not include next, previous and facets."""
+
+    def get_paginated_response_context(self, data):
+        """Get paginated response data."""
+
+        # Return simplified count and data dictionary.
+        return [
+            ("meta", {
+                "limit": self.limit,
+                "offset": {
+                    "current": self.offset,
+                    "next": self.get_next_offset(),
+                    "previous": self.get_previous_offset()
+                },
+                "size": len(data),
+                "total": self.count
+            }),
+            ("results", data)
+        ]
+
+    def get_next_offset(self):
+        """Get next offset, if available."""
+
+        # Return none if next offset exceeds limit.
+        if self.offset + self.limit >= self.count:
+            return None
+
+        # Calculate and return next offset.
+        return self.offset + self.limit
+
+    def get_previous_offset(self):
+        """Get previous offset, if available."""
+
+        # Return none if previous offset exceeds limit.
+        if self.offset <= 0:
+            return None
+
+        # Calculate and return previous offset.
+        return self.offset - self.limit

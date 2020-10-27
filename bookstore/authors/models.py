@@ -1,15 +1,14 @@
 from django.db import models
 
+from common.models import TimestampModel
 
-class Author(models.Model):
-    """First name."""
+
+class Author(TimestampModel):
+    """Represents author of the book."""
+
+    # Author's personal details.
     first_name = models.CharField(max_length=255)
-
-    """Last name."""
     last_name = models.CharField(max_length=255)
-
-    """Created."""
-    created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return "{} {}".format(self.first_name, self.last_name)

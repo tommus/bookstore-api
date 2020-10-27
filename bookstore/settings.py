@@ -25,7 +25,7 @@ INSTALLED_APPS = [
     # endregion
 
     # region REST Documentation
-    "drf_yasg",
+    "drf_yasg"
     # endregion
 ]
 
@@ -35,7 +35,7 @@ INSTALLED_APPS += [
     "bookstore.bindings.apps.BindingsConfig",
     "bookstore.books.apps.BooksConfig",
     "bookstore.docs.apps.DocsConfig",
-    "bookstore.publishers.apps.PublishersConfig",
+    "bookstore.publishers.apps.PublishersConfig"
 ]
 
 # endregion
@@ -49,7 +49,7 @@ DATABASES = {
         "USER": os.environ.get("DB_USER"),
         "PASSWORD": os.environ.get("DB_PASSWORD"),
         "HOST": os.environ.get("DB_HOST"),
-        "PORT": os.environ.get("DB_PORT"),
+        "PORT": os.environ.get("DB_PORT")
     }
 }
 
@@ -66,15 +66,15 @@ LOGGING = {
     "handlers": {
         "console": {
             "level": "DEBUG",
-            "class": "logging.StreamHandler",
-        },
+            "class": "logging.StreamHandler"
+        }
     },
     "loggers": {
         "django": {
             "handlers": ["console"],
-            "level": "INFO",
-        },
-    },
+            "level": "INFO"
+        }
+    }
 }
 
 # endregion
@@ -101,7 +101,7 @@ SWAGGER_SETTINGS = {
             "name": "Authorization",
             "in": "header"
         }
-    },
+    }
 }
 
 REDOC_SETTINGS = {
@@ -131,7 +131,7 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware"
 ]
 
 # endregion
@@ -139,10 +139,10 @@ MIDDLEWARE = [
 # region Password Validation
 
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator", },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator", },
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator", },
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator", },
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"}
 ]
 
 # endregion
@@ -179,6 +179,9 @@ REST_FRAMEWORK = {
 
     # Defines default versioning scheme.
     "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.NamespaceVersioning",
+
+    # Define default page size.
+    "PAGE_SIZE": 20
 }
 
 # endregion
@@ -220,7 +223,7 @@ TEMPLATES = [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
-                "django.contrib.messages.context_processors.messages",
+                "django.contrib.messages.context_processors.messages"
             ],
         },
     },
