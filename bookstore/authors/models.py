@@ -11,4 +11,7 @@ class Author(TimestampModel):
     last_name = models.CharField(max_length=255)
 
     def __str__(self):
+        """Represents this entity as a char sequence."""
+
+        # Concatenate first name and last name.
         return "{} {}".format(self.first_name, self.last_name)

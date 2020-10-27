@@ -180,7 +180,8 @@ REST_FRAMEWORK = {
     # Defines default versioning scheme.
     "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.NamespaceVersioning",
 
-    # Define default page size.
+    # Defines pagination details.
+    "DEFAULT_PAGINATION_CLASS": "bookstore.common.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 20
 }
 

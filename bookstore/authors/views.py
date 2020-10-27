@@ -59,8 +59,8 @@ class AuthorPagination(LimitOffsetPagination):
     )
 )
 class AuthorViewSet(BaseDocumentViewSet):
-    """A view set that provides CRUD methods configuration for author
-    document."""
+    """A view set that provides CRUD methods configuration
+    for author document."""
 
     # Associates view set with author document.
     document = AuthorDocument
