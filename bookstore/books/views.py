@@ -4,13 +4,10 @@ from django_elasticsearch_dsl_drf.filter_backends import OrderingFilterBackend, 
 from django_elasticsearch_dsl_drf.viewsets import BaseDocumentViewSet
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework import viewsets
 from rest_framework.status import HTTP_200_OK, HTTP_404_NOT_FOUND
 
 from bookstore.books.documents import BookDocument
-from bookstore.books.models import Book
 from bookstore.books.schemas import (
-    schema_book_list_query,
     schema_book_list_response,
     schema_book_details_path,
     schema_book_details_response,
@@ -24,19 +21,9 @@ class BookPagination(LimitOffsetPagination):
     max_limit = 50
 
 
-# noinspection PyTypeChecker
-@method_decorator(
-    name="create",
-    decorator=swagger_auto_schema(auto_schema=None)
-)
-@method_decorator(
-    name="destroy",
-    decorator=swagger_auto_schema(auto_schema=None)
-)
 @method_decorator(
     name="list",
     decorator=swagger_auto_schema(
-        manual_parameters=schema_book_list_query,
         operation_id="book:list",
         operation_summary="List books (pageable)",
         operation_description="Allows to retrieve a list of books.",
@@ -49,10 +36,6 @@ class BookPagination(LimitOffsetPagination):
         security=[],
         tags=["books"],
     )
-)
-@method_decorator(
-    name="partial_update",
-    decorator=swagger_auto_schema(auto_schema=None)
 )
 @method_decorator(
     name="retrieve",
@@ -75,24 +58,7 @@ class BookPagination(LimitOffsetPagination):
         tags=["books"],
     )
 )
-@method_decorator(
-    name="update",
-    decorator=swagger_auto_schema(auto_schema=None)
-)
-class BookViewSet(viewsets.ModelViewSet):
-    http_method_names = ["get"]
-    pagination_class = BookPagination
-    queryset = Book.objects.all()
-    serializers = {
-        "list": BookListSerializer,
-        "retrieve": BookDetailsSerializer
-    }
-
-    def get_serializer_class(self):
-        return self.serializers[self.action]
-
-
-class BookSearchViewSet(BaseDocumentViewSet):
+class BookViewSet(BaseDocumentViewSet):
     """A view set that provides CRUD methods configuration
     for book document."""
 
