@@ -1,7 +1,7 @@
 from django_elasticsearch_dsl_drf.serializers import DocumentSerializer
 from rest_framework import serializers
 
-from authors.documents import AuthorDocument
+from bookstore.authors.documents import AuthorDocument
 from bookstore.authors.models import Author
 
 

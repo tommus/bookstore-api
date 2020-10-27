@@ -1,6 +1,6 @@
 from django.db import models
 
-from common.models import TimestampModel
+from bookstore.common.models import TimestampModel
 
 
 class Author(TimestampModel):

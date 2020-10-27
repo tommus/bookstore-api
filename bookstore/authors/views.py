@@ -7,7 +7,7 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
 from rest_framework.status import HTTP_200_OK, HTTP_404_NOT_FOUND
 
-from authors.documents import AuthorDocument
+from bookstore.authors.documents import AuthorDocument
 from bookstore.authors.models import Author
 from bookstore.authors.schemas import (
     schema_author_list_response,
