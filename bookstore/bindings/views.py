@@ -34,7 +34,7 @@ from bookstore.common.schemas import schema_error
             ),
         },
         security=[],
-        tags=["books"],
+        tags=["bindings"],
     )
 )
 @method_decorator(
@@ -59,7 +59,7 @@ from bookstore.common.schemas import schema_error
             ),
         },
         security=[],
-        tags=["books"],
+        tags=["bindings"],
     )
 )
 @method_decorator(
