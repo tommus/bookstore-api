@@ -17,13 +17,15 @@ class BookDocument(Document):
     title = StringField(fields={"raw": KeywordField()})
 
     # References book's author.
-    author = StringField(
+    author = IntegerField(attr="author.id")
+    author_indexing = StringField(
         attr="author_indexing",
         fields={"raw": KeywordField()}
     )
 
     # References book's publisher.
-    publisher = StringField(
+    publisher = IntegerField(attr="publisher.id")
+    publisher_indexing = StringField(
         attr="publisher_indexing",
         fields={"raw": KeywordField()}
     )
@@ -35,7 +37,8 @@ class BookDocument(Document):
     # Technical details.
     format = StringField(fields={"raw": KeywordField()})
     pages = IntegerField()
-    binding = StringField(
+    binding = IntegerField(attr="binding.id")
+    binding_indexing = StringField(
         attr="binding_indexing",
         fields={"raw": KeywordField()}
     )

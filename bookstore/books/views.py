@@ -77,20 +77,20 @@ class BookViewSet(BaseDocumentViewSet):
 
     # Defines which fields will be searched against.
     multi_match_search_fields = (
-        "title", "author", "publisher", "isbn", "ean", "description")
+        "title", "author_indexing", "publisher_indexing", "isbn", "ean", "description")
 
     # Defines item ordering.
-    ordering = ("id", "title", "author", "publisher")
+    ordering = ("id", "title", "author_indexing", "publisher_indexing")
     ordering_fields = {
         "id": "id",
         "title": "title.raw",
-        "author": "author.raw",
-        "publisher": "publisher.raw"
+        "author": "author_indexing.raw",
+        "publisher": "publisher_indexing.raw"
     }
 
     # Defines which fields will be searched against.
     search_fields = (
-        "title", "author", "publisher", "isbn", "ean", "description")
+        "title", "author_indexing", "publisher_indexing", "isbn", "ean", "description")
 
     # Configures pagination.
     pagination_class = BookPagination
