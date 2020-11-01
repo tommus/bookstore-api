@@ -1,30 +1,24 @@
 from django.utils.decorators import method_decorator
+from django_elasticsearch_dsl_drf.filter_backends import OrderingFilterBackend, DefaultOrderingFilterBackend, \
+    CompoundSearchFilterBackend
+from django_elasticsearch_dsl_drf.viewsets import BaseDocumentViewSet
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework import viewsets
 from rest_framework.status import HTTP_200_OK, HTTP_404_NOT_FOUND
 
-from bookstore.common.pagination import CursorHashPagination
+from bookstore.common.pagination import LimitOffsetPagination
 from bookstore.common.schemas import schema_error
-from bookstore.publishers.models import Publisher
+from bookstore.publishers.documents import PublisherDocument
 from bookstore.publishers.schemas import schema_publisher_list_query, schema_publisher_list_response, \
     schema_publisher_details_path, schema_publisher_details_response
 from bookstore.publishers.serializers import PublisherSerializer
 
 
-class PublisherPagination(CursorHashPagination):
-    page_size = 25
+class PublisherPagination(LimitOffsetPagination):
+    max_limit = 50
 
 
 # noinspection PyTypeChecker
-@method_decorator(
-    name="create",
-    decorator=swagger_auto_schema(auto_schema=None)
-)
-@method_decorator(
-    name="destroy",
-    decorator=swagger_auto_schema(auto_schema=None)
-)
 @method_decorator(
     name="list",
     decorator=swagger_auto_schema(
@@ -41,10 +35,6 @@ class PublisherPagination(CursorHashPagination):
         security=[],
         tags=["publishers"],
     )
-)
-@method_decorator(
-    name="partial_update",
-    decorator=swagger_auto_schema(auto_schema=None)
 )
 @method_decorator(
     name="retrieve",
@@ -67,11 +57,35 @@ class PublisherPagination(CursorHashPagination):
         tags=["publishers"],
     )
 )
-@method_decorator(
-    name="update",
-    decorator=swagger_auto_schema(auto_schema=None)
-)
-class PublisherViewSet(viewsets.ModelViewSet):
-    queryset = Publisher.objects.all()
-    serializer_class = PublisherSerializer
+class PublisherViewSet(BaseDocumentViewSet):
+    """A view set that provides CRUD methods configuration
+    for publisher document."""
+
+    # Associates view set with publisher document.
+    document = PublisherDocument
+
+    # Defines what sort of filtering options are available.
+    filter_backends = [
+        OrderingFilterBackend,
+        DefaultOrderingFilterBackend,
+        CompoundSearchFilterBackend
+    ]
+
+    # Defines a single document lookup field.
+    lookup_field = "id"
+
+    # Defines item ordering.
+    ordering = ("id", "name")
+    ordering_fields = {
+        "id": "id",
+        "name": "name.raw"
+    }
+
+    # Defines which fields will be searched against.
+    search_fields = ["name"]
+
+    # Configures pagination.
     pagination_class = PublisherPagination
+
+    # Configures serialization.
+    serializer_class = PublisherSerializer
