@@ -5,6 +5,10 @@ from bookstore.publishers.views import PublisherViewSet
 app_name = "publishers"
 
 router = DefaultRouter()
-router.register("", PublisherViewSet)
+router.register(
+    basename="publishers",
+    prefix="",
+    viewset=PublisherViewSet
+)
 
 urlpatterns = router.urls

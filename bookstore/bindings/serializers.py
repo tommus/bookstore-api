@@ -4,9 +4,7 @@ from bookstore.bindings.models import Binding
 
 
 class BindingSerializer(serializers.ModelSerializer):
-    """
-    Serializes binding model.
-    """
+    """Serializes binding model."""
 
     class Meta:
         model = Binding

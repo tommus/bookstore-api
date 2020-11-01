@@ -1,13 +1,16 @@
-from rest_framework import serializers
+from django_elasticsearch_dsl_drf.serializers import DocumentSerializer
 
-from bookstore.publishers.models import Publisher
+from bookstore.publishers.documents import PublisherDocument
 
 
-class PublisherSerializer(serializers.ModelSerializer):
-    """
-    Serializes publisher model.
-    """
+class PublisherSerializer(DocumentSerializer):
+    """Serializes publisher document."""
 
     class Meta:
-        model = Publisher
-        fields = ("id", "name",)
+        """Describes serialization details."""
+
+        # Points to the document associated with this serializer.
+        document = PublisherDocument
+
+        # Defines which fields are subject for serialization.
+        fields = ("id", "name")
