@@ -24,7 +24,7 @@ from bookstore.common.schemas import schema_error
     name="list",
     decorator=swagger_auto_schema(
         operation_id="binding:list",
-        operation_summary="List bindings (pageable)",
+        operation_summary="List bindings",
         operation_description="Allows to retrieve a list of bindings.",
         responses={
             HTTP_200_OK: openapi.Response(
