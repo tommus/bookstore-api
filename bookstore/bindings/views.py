@@ -4,10 +4,10 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
 from rest_framework.status import HTTP_200_OK, HTTP_404_NOT_FOUND
 
-from bookstore.bindings.schemas import schema_binding_list_query, schema_binding_list_response, \
-    schema_binding_details_path, schema_binding_details_response
-from bookstore.bindings.serializers import BindingSerializer
 from bookstore.bindings.models import Binding
+from bookstore.bindings.schemas import schema_binding_list_response, schema_binding_details_path, \
+    schema_binding_details_response
+from bookstore.bindings.serializers import BindingSerializer
 from bookstore.common.schemas import schema_error
 
 
@@ -23,7 +23,6 @@ from bookstore.common.schemas import schema_error
 @method_decorator(
     name="list",
     decorator=swagger_auto_schema(
-        manual_parameters=schema_binding_list_query,
         operation_id="binding:list",
         operation_summary="List bindings (pageable)",
         operation_description="Allows to retrieve a list of bindings.",
