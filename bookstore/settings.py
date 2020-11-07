@@ -34,6 +34,7 @@ INSTALLED_APPS += [
     "bookstore.authors.apps.AuthorsConfig",
     "bookstore.bindings.apps.BindingsConfig",
     "bookstore.books.apps.BooksConfig",
+    "bookstore.carts.apps.CartsConfig",
     "bookstore.docs.apps.DocsConfig",
     "bookstore.publishers.apps.PublishersConfig"
 ]
