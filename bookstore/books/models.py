@@ -12,10 +12,12 @@ class Book(models.Model):
     title = models.CharField(max_length=255)
 
     # References book's author.
-    author = models.ForeignKey(to=Author, on_delete=models.CASCADE, related_name="books")
+    author = models.ForeignKey(
+        to=Author, on_delete=models.CASCADE, related_name="books")
 
     # References book's publisher.
-    publisher = models.ForeignKey(to=Publisher, on_delete=models.CASCADE, related_name="books")
+    publisher = models.ForeignKey(
+        to=Publisher, on_delete=models.CASCADE, related_name="books")
 
     # Publication details.
     release_date = models.DateField()
@@ -24,7 +26,8 @@ class Book(models.Model):
     # Technical details.
     format = models.CharField(max_length=255)
     pages = models.PositiveSmallIntegerField()
-    binding = models.ForeignKey(to=Binding, on_delete=models.CASCADE, related_name="books")
+    binding = models.ForeignKey(
+        to=Binding, on_delete=models.CASCADE, related_name="books")
 
     # Cover image referenced as image or url.
     cover_url = models.URLField(default="", blank=True)
